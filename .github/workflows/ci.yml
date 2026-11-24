@@ -58,3 +58,19 @@ jobs:
 
       - name: Build
         run: npm run build:frontend
+
+  security:
+    name: Security audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
